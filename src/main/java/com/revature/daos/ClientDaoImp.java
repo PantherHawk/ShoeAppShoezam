@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Example;
+import org.hibernate.query.Query;
 
 import com.revature.beans.Client;
 import com.revature.util.HibernateUtil;
@@ -28,7 +30,7 @@ public class ClientDaoImp implements ClientDao {
 		return user;
 	}
 
-	@Override
+	@Override  
 	public List<Client> getAll() {
 		Session s = HibernateUtil.getSession();
 		List<Client> clients = s.createQuery("from Client").list();
@@ -65,6 +67,23 @@ public class ClientDaoImp implements ClientDao {
 		s.update(client);
 		tx.commit();
 		s.close();
+	}
+	@Override
+	public Client login(Client client) {
+		Session s = HibernateUtil.getSession();
+		
+//		Client c = (Client) s.createCriteria(Client.class).add(Example.create(client));1
+//		String hql = "from Client where email = :email and pass = :pass";
+//		Client found = (Client) s.createQuery(hql).setParameter("email", client.getEmail()).setParameter("pass", client.getPass());
+//		Client found = (Client) s.createNativeQuery("SELECT * FROM CLIENT C WHERE C.EMAIL = ? AND C.PASS = ?", Client.class)
+//				.setParameter(1, client.getEmail())
+//				.setParameter(2, client.getPass());
+		Query<Client> q = s.createQuery("from Client where email = :email and pass = :pass")
+								.setParameter("email", client.getEmail())
+								.setParameter("pass", client.getPass());
+		Client c = (Client) q.getSingleResult();
+		System.out.println(c);
+		return c;
 	}
 
 }

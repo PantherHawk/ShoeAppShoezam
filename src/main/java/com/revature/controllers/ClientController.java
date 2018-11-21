@@ -30,7 +30,31 @@ public class ClientController {
 	@ResponseBody
 	public Client getClientViaLogin(@RequestBody Client client) {
 		System.out.println("Hit login controller");
+		System.out.println("Login request body: " + client);
 		return ClientService.getInstance().login(client);
 //		return ClientService.getInstance().login(client);
+	}
+	
+	@RequestMapping(value="/clients", method=RequestMethod.POST)
+	@ResponseBody
+	public Client getOneClient(@RequestBody Client client) {
+		return ClientService.getInstance().getOne(client);
+	}
+	
+	@RequestMapping(value="/clients/:id", method=RequestMethod.POST)
+	public boolean removeClient(@RequestBody Client client) {
+		return ClientService.getInstance().deleteClient(client);
+	}
+	
+	@RequestMapping(value="/clients", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean add(@RequestBody Client client) {
+		return ClientService.getInstance().createClient(client);
+	}
+	
+	@RequestMapping(value="/clients", method=RequestMethod.PUT)
+	@ResponseBody
+	public void edit(@RequestBody Client client) {
+		ClientService.getInstance().editClient(client);
 	}
 }
