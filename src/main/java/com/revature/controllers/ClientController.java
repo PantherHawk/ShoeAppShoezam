@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.beans.Client;
@@ -16,6 +16,9 @@ import com.revature.services.ClientService;
 
 @Controller
 public class ClientController {
+	
+	@Autowired
+	ClientService clientService;
 
 	@GetMapping("/clients")
 //	@RequestMapping(value="/clients", method=RequestMethod.GET)
@@ -35,13 +38,15 @@ public class ClientController {
 //		return ClientService.getInstance().login(client);
 	}
 	
-	@RequestMapping(value="/clients", method=RequestMethod.POST)
-	@ResponseBody
-	public Client getOneClient(@RequestBody Client client) {
-		return ClientService.getInstance().getOne(client);
-	}
+//	@RequestMapping(value="/clients/{id}", method=RequestMethod.GET)
+//	@ResponseBody
+//	public Client getOneClient(@RequestParam("id") Integer id) {
+//		Client client = new Client();
+//		client.setUserid(id);
+//		return ClientService.getInstance().getOne(client);
+//	}
 	
-	@RequestMapping(value="/clients/:id", method=RequestMethod.POST)
+	@RequestMapping(value="/clients/:id", method=RequestMethod.DELETE)
 	public boolean removeClient(@RequestBody Client client) {
 		return ClientService.getInstance().deleteClient(client);
 	}

@@ -10,6 +10,17 @@ import com.revature.beans.Shoe;
 import com.revature.util.HibernateUtil;
 
 public class ShoeDaoImp implements ShoeDao {
+	
+	private static ShoeDaoImp shoeDaoImp;
+	public ShoeDaoImp() {
+		
+	}
+	public static ShoeDaoImp getInstance() {
+		if (shoeDaoImp == null) {
+			shoeDaoImp = new ShoeDaoImp();
+		}
+		return shoeDaoImp;
+	}
 
 	@Override
 	public List<Shoe> getAll() {

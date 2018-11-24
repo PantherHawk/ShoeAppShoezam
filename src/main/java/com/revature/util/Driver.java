@@ -1,8 +1,11 @@
 package com.revature.util;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.revature.beans.Client;
 import com.revature.beans.Shoe;
@@ -14,16 +17,16 @@ import com.revature.daos.ShoeRequestDaoImp;
 public class Driver {
 
 	public static void main(String[] args) {
-		Session session = HibernateUtil.getSession();
-		session.close();
+//		Session session = HibernateUtil.getSession();
+//		session.close();
 //		
-		ClientDaoImp cd = ClientDaoImp.getInstance();
-		ShoeDaoImp sd = new ShoeDaoImp();
-		ShoeRequestDaoImp sr = new ShoeRequestDaoImp();
+//		ClientDaoImp cd = ClientDaoImp.getInstance();
+//		ShoeDaoImp sd = new ShoeDaoImp();
+//		ShoeRequestDaoImp sr = new ShoeRequestDaoImp();
 //		
-		Client client = new Client("jh@dundermifflin.biz", "password");
-		Client c = cd.get(client);
-		System.out.println(c);
+//		Client client = new Client("jh@dundermifflin.biz", "password");
+//		Client c = cd.get(client);
+//		System.out.println(c);
 //		testing create client
 //		Client pam = new Client("Pam", "Beasely", "pamb@pratinstitutde.edu", "password", "213 cherry lane", 38383, "USA", "909-999-9999");
 //		Client jim = new Client("Jim", "Halpern", "jh@dundermifflin.biz", "password", "213 cherry lane", 38383, "USA", "909-999-9999");
@@ -79,15 +82,15 @@ public class Driver {
 //		ShoeRequest denied = new ShoeRequest(1, pam, jim, nikes, airJs, "I'd love to trade shoes with you Jim.");
 //		boolean success = sr.deny(denied);
 		
-//		testing spring IOC container
+//		testing spring IOC container/
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 //		System.out.println("Bean names: " +
 //		Arrays.toString(ac.getBeanNamesForType(Client.class)));
 //		Client c = (Client) ac.getBean("client");
 //		c.methodInClientToTestAutomagic();
-//		ApplicationContext ac = new ClassPathXmlApplicationContext("../../webapp/WEB-INF/beans.xml");
-//		System.out.println("Bean names: " +
-//				Arrays.toString(ac.getBeanDefinitionNames()));
+		ApplicationContext ac = new ClassPathXmlApplicationContext("src/main/webapp/WEB-INF/beans.xml");
+		System.out.println("Bean names: " +
+				Arrays.toString(ac.getBeanDefinitionNames()));
 		
 	}
 }

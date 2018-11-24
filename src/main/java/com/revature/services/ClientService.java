@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Client;
 import com.revature.daos.ClientDaoImp;
 
-//@Service
+@Service
 public class ClientService {
 
 	private static ClientService clientService;

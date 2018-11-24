@@ -9,6 +9,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(uniqueConstraints= {@UniqueConstraint(columnNames= {"email", "pass"})})
 public class Client {
@@ -42,6 +45,11 @@ public class Client {
 	/** Constructor with no fields for failed logins */
 	public Client() {
 		super();
+	}
+	
+	public Client(Integer id) {
+		super();
+		this.id = id;
 	}
 	/** Constructor with only email and password for generating bean with login data*/
 	public Client(String email, String pass) {
