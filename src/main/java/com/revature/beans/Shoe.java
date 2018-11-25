@@ -3,12 +3,15 @@ package com.revature.beans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 public class Shoe {
 
 	private Integer id;
 	
 	/** Unidirectional association via foreign key*/
+	@JsonIgnore
 	@Autowired
 	private Client client;
 	

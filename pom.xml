@@ -11,34 +11,42 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	
-<dependencyManagement>
-  		<dependencies>
-  			<dependency>
-  				<groupId>io.spring.platform</groupId>
-  				<artifactId>platform-bom</artifactId>
-  				<version>4.2.5.RELEASE</version>
-				<scope>import</scope>
-  			</dependency>
-  		</dependencies>
-  	</dependencyManagement>
+  	
+  	 	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
   
   <dependencies>
-  <dependency>
-		<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.3.3.RELEASE</version>
+  
+  
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 		</dependency>
+
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.2</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.3.RELEASE</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -52,7 +60,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.6.3</version>
+			<version>2.9.4</version>
 		</dependency>
 		
 		<dependency>
@@ -72,7 +80,5 @@
 			<version>5.3.7.Final</version>
 		</dependency>
 	</dependencies>  
-	<build>
-    <finalName>Shoezam</finalName>
-  </build>
+
 </project>
