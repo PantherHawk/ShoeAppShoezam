@@ -13,7 +13,10 @@
 		<property name="color" type="org.hibernate.type.StringType"></property>
 		<property name="shoeSize" type="org.hibernate.type.DoubleType"></property>
 		<property name="shoeStatus" type="org.hibernate.type.IntegerType"></property>
-		<many-to-one name="client" class="com.revature.beans.Client"></many-to-one>
+		<many-to-one name="client" 
+		class="com.revature.beans.Client"
+		lazy="false"
+		fetch="select"></many-to-one>
 		
 	</class>
 

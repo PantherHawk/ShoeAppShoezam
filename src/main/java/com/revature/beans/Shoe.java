@@ -1,9 +1,11 @@
 package com.revature.beans;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
 public class Shoe {
@@ -11,7 +13,8 @@ public class Shoe {
 	private Integer id;
 	
 	/** Unidirectional association via foreign key*/
-	@JsonIgnore
+//	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "client_id", nullable = false)
 	@Autowired
 	private Client client;
 	
