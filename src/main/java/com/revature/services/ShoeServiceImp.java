@@ -30,8 +30,7 @@ public class ShoeServiceImp implements ShoeService {
 	}
 	@Override
 	public List<Shoe> fetchShoesByBrand(String brand) {
-		// TODO Auto-generated method stub
-		return null;
+		return ShoeDaoImp.getInstance().getByBrand(brand);
 	}
 	@Override
 	public List<Shoe> fetchShoesBySize(Double min, Double max) {

@@ -37,4 +37,11 @@ public class ShoeControler {
 		List<Shoe> coloredShoes = shoeService.fetchShoesByColor(color);
 		return coloredShoes;
 	}
+	
+	@GetMapping("/brand/{whichBrand}")
+	@ResponseBody
+	public List<Shoe> getShoesByBrand(@PathVariable("whichBrand") String brand) {
+		List<Shoe> brandShoes = shoeService.fetchShoesByBrand(brand);
+		return brandShoes;
+	}
 }
