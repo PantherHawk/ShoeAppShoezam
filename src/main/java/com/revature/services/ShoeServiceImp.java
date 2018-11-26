@@ -60,8 +60,8 @@ public class ShoeServiceImp implements ShoeService {
 	}
 	@Override
 	public Shoe addShoe(Shoe shoe) {
-		// TODO Auto-generated method stub
-		return null;
+		ShoeDaoImp.getInstance().add(shoe);
+		return shoe;
 	}
 	
 }

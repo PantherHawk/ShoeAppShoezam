@@ -3,12 +3,17 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.revature.beans.Client;
 import com.revature.beans.Shoe;
 import com.revature.services.ShoeService;
 
@@ -66,11 +71,21 @@ public class ShoeControler {
 		return shoesInRange;
 	}
 	
-	@GetMapping("/{shoeId}")
+//	@GetMapping("/{shoeId}")
+//	@ResponseBody
+//	public Shoe getOneShoeById(@PathVariable("shoeId") Integer id) {
+//		Shoe found = shoeService.fetchOneShoe(id);
+//		return found;
+//	}
+	
+	@PostMapping
 	@ResponseBody
-	public Shoe getOneShoeById(@PathVariable("shoeId") Integer id) {
-		Shoe found = shoeService.fetchOneShoe(id);
-		return found;
+	@ResponseStatus(HttpStatus.CREATED)
+	public String addNewShoe(@RequestBody Shoe shoe) {
+		shoeService.addShoe(shoe);
+		String response = "Shoe added.";
+		return response;
 	}
+	
 	
 }
