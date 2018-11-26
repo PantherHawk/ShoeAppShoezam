@@ -183,9 +183,11 @@ public class Shoe {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Shoe [shoeid=" + id + ", userid=" + id + ", brand=" + brand + ", size=" + shoeSize + ", price="
-				+ price + ", color=" + color + "]";
+		return "Shoe [id=" + id + ", client=" + client + ", title=" + title + ", brand=" + brand + ", shoeSize="
+				+ shoeSize + ", price=" + price + ", color=" + color + ", shoeStatus=" + shoeStatus + "]";
 	}
+
 }

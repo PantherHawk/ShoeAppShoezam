@@ -82,7 +82,16 @@ public class ShoeControler {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	public String addNewShoe(@RequestBody Shoe shoe) {
-		shoeService.addShoe(shoe);
+		System.out.println("Shoe in post request: " + shoe);
+//		Client client, String title, String brand, Double size, Double price, String color, Integer shoeStatus
+		Shoe toPost = new Shoe(shoe.getClient(), 
+				shoe.getTitle(), 
+				shoe.getBrand(), 
+				shoe.getShoeSize(), 
+				shoe.getPrice(), 
+				shoe.getColor(), 
+				shoe.getShoeStatus());
+		shoeService.addShoe(toPost);
 		String response = "Shoe added.";
 		return response;
 	}

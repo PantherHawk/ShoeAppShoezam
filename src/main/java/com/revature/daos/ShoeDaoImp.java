@@ -124,6 +124,7 @@ public class ShoeDaoImp implements ShoeDao {
 		
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
+		System.out.println("shoe to add at dao layer? " + shoe);
 		s.save(shoe);
 		tx.commit();
 		s.close();
