@@ -3,9 +3,9 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,5 +29,12 @@ public class ShoeControler {
 		System.out.println("Hit get all shoes...");
 		List<Shoe> allShoes = shoeService.fetchAllShoes();
 		return allShoes;
+	}
+	
+	@GetMapping("/color/{whichColor}")
+	@ResponseBody
+	public List<Shoe> getShoesByColor(@PathVariable("whichColor") String color) {
+		List<Shoe> coloredShoes = shoeService.fetchShoesByColor(color);
+		return coloredShoes;
 	}
 }

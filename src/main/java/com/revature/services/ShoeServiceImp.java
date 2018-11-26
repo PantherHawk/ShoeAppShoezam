@@ -26,8 +26,7 @@ public class ShoeServiceImp implements ShoeService {
 	}
 	@Override
 	public List<Shoe> fetchShoesByColor(String color) {
-		// TODO Auto-generated method stub
-		return null;
+		return ShoeDaoImp.getInstance().getByColor(color);
 	}
 	@Override
 	public List<Shoe> fetchShoesByBrand(String brand) {
