@@ -45,12 +45,12 @@ public class ShoeControler {
 		return brandShoes;
 	}
 	
-	@GetMapping("/size/{whichSize}")
-	@ResponseBody
-	public List<Shoe> getShoesBySize(@PathVariable("whichSize") Double size) {
-		List<Shoe> shoesOfSize = shoeService.fetchShoesBySize(size);
-		return shoesOfSize;
-	}
+//	@GetMapping("/size/{whichSize}")
+//	@ResponseBody
+//	public List<Shoe> getShoesBySize(@PathVariable("whichSize") Double size) {
+//		List<Shoe> shoesOfSize = shoeService.fetchShoesBySize(size);
+//		return shoesOfSize;
+//	}
 	
 	@GetMapping("/size/{min}/{max}")
 	@ResponseBody
@@ -58,4 +58,12 @@ public class ShoeControler {
 		List<Shoe> shoesInRange = shoeService.fetchShoesBySizeRange(min, max);
 		return shoesInRange;
 	}
+	
+	@GetMapping("/price/{min}/{max}")
+	@ResponseBody
+	public List<Shoe> getShoesInPriceRange(@PathVariable("min") Double min, @PathVariable("max") Double max) {
+		List<Shoe> shoesInRange = shoeService.fetchShoesByPriceRange(min, max);
+		return shoesInRange;
+	}
+	
 }
