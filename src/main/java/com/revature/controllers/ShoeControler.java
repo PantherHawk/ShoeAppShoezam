@@ -44,4 +44,18 @@ public class ShoeControler {
 		List<Shoe> brandShoes = shoeService.fetchShoesByBrand(brand);
 		return brandShoes;
 	}
+	
+	@GetMapping("/size/{whichSize}")
+	@ResponseBody
+	public List<Shoe> getShoesBySize(@PathVariable("whichSize") Double size) {
+		List<Shoe> shoesOfSize = shoeService.fetchShoesBySize(size);
+		return shoesOfSize;
+	}
+	
+	@GetMapping("/size/{min}/{max}")
+	@ResponseBody
+	public List<Shoe> getShoesInSizeRange(@PathVariable("min") Double min, @PathVariable("max") Double max) {
+		List<Shoe> shoesInRange = shoeService.fetchShoesBySizeRange(min, max);
+		return shoesInRange;
+	}
 }

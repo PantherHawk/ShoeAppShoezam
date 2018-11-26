@@ -29,13 +29,16 @@ public class ShoeServiceImp implements ShoeService {
 		return ShoeDaoImp.getInstance().getByColor(color);
 	}
 	@Override
+	public List<Shoe> fetchShoesBySize(Double size) {
+		return ShoeDaoImp.getInstance().getBySize(size);
+	}
+	@Override
 	public List<Shoe> fetchShoesByBrand(String brand) {
 		return ShoeDaoImp.getInstance().getByBrand(brand);
 	}
 	@Override
-	public List<Shoe> fetchShoesBySize(Double min, Double max) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Shoe> fetchShoesBySizeRange(Double min, Double max) {
+		return ShoeDaoImp.getInstance().getBySizerange(min, max);
 	}
 	@Override
 	public List<Shoe> fetchShoesByPriceRange(Double min, Double max) {

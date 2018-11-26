@@ -40,18 +40,18 @@ public class ShoeDaoImp implements ShoeDao {
 		return shoesOfColor;
 	}
 
-	@Override
-	public List<Shoe> getByType(String type) {
-		Session s = HibernateUtil.getSession();
-		List<Shoe> shoesofType = s.createQuery("from Shoes where color="+ type).list();
-		s.close();
-		return shoesofType;
-	}
+//	@Override
+//	public List<Shoe> getByType(String type) {
+//		Session s = HibernateUtil.getSession();
+//		List<Shoe> shoesofType = s.createQuery("from Shoes where color="+ type).list();
+//		s.close();
+//		return shoesofType;
+//	}
 
 	@Override
 	public List<Shoe> getBySize(Double size) {
 		Session s = HibernateUtil.getSession();
-		List<Shoe> shoesOfSize = s.createQuery("from Shoes where size like '%"+ size + "'").list();
+		List<Shoe> shoesOfSize = s.createQuery("from Shoe where size like '%"+ size + "'").list();
 		s.close();
 		return shoesOfSize;
 	}
@@ -146,6 +146,11 @@ public class ShoeDaoImp implements ShoeDao {
 										.list();
 		s.close();
 		return shoesInRange;
+	}
+	@Override
+	public List<Shoe> getByType(String type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
