@@ -12,7 +12,7 @@ public interface ShoeService {
 	public List<Shoe> fetchShoesBySize(Double size);
 	public List<Shoe> fetchShoesBySizeRange(Double min, Double max);
 	public List<Shoe> fetchShoesByPriceRange(Double min, Double max);
-	public Shoe fetchOneShoe();
+	public Shoe fetchOneShoe(Integer id);
 	public Shoe updateShoe(Shoe shoe);
 	public Shoe removeShoe(Shoe shoe);
 	public Shoe addShoe(Shoe shoe);

@@ -66,4 +66,11 @@ public class ShoeControler {
 		return shoesInRange;
 	}
 	
+	@GetMapping("/{shoeId}")
+	@ResponseBody
+	public Shoe getOneShoeById(@PathVariable("shoeId") Integer id) {
+		Shoe found = shoeService.fetchOneShoe(id);
+		return found;
+	}
+	
 }

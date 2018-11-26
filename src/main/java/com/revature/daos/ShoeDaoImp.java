@@ -88,9 +88,14 @@ public class ShoeDaoImp implements ShoeDao {
 	@Override
 	public Shoe getOneShoe(Shoe shoe) {
 		Session s = HibernateUtil.getSession();
-		Shoe the_shoe = s.get(Shoe.class, shoe.getId());
-		s.close();
-		return the_shoe;
+//		Shoe the_shoe = (Shoe) s.get(Shoe.class, shoe.getId());
+//		s.close();
+//		System.out.println(the_shoe);
+//		return the_shoe;
+		Query<Shoe> result = s.createQuery("from Shoe WHERE SHOE_ID=:shoe_id", Shoe.class)
+				.setParameter("shoe_id", shoe.getId());
+		Shoe found = (Shoe) result.getSingleResult();
+		return found;
 	}
 
 	@Override
