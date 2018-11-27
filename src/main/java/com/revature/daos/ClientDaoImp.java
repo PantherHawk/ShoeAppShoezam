@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Example;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 
 import com.revature.beans.Client;
 import com.revature.util.HibernateUtil;
@@ -26,7 +26,7 @@ public class ClientDaoImp implements ClientDao {
 	@Override
 	public Client get(Client client) {
 		Session s = HibernateUtil.getSession();
-		Client user = s.get(Client.class, client.getUserid());
+		Client user = s.get(Client.class, client.getId());
 		return user;
 	}
 
@@ -49,14 +49,32 @@ public class ClientDaoImp implements ClientDao {
 
 	@Override
 	public int create(Client client) {
+		System.out.println("In the client dao, the "
+				+ "client object we want to persist--------->" + client);
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
-		int success = (int) s.save(client);
+//		Client c = new Client();
+//		c.setAddress(client.getAddress());
+//		c.setCountry(client.getCountry());
+//		c.setEmail(client.getEmail());
+//		c.setFirstName(client.getFirstName());
+//		c.setIsAdmin(client.getIsAdmin());
+//		c.setIsBlocked(client.getIsBlocked());
+//		c.setLastName(client.getLastName());
+//		c.setPass(client.getPass());
+//		c.setPhoneNumber(client.getPhoneNumber());
+//		c.setPostalCode(client.getPostalCode());
+//		c.setId(0);
+		s.save(client);
+//		Query<Client> checkClient = s.createQuery("from Client c where c.email=:email")
+//		.setParameter("name", client.getEmail())
+//		.setResultTransformer(Transformers.aliasToBean(Client.class));
 		tx.commit();
 		s.close();
-		if (success > 0) {
-			return success;
-		}
+//		int success = checkClient.getSingleResult().getId();
+//		if (success > 0) {
+//			return success;
+//		}
 		return 0;
 	}
 
@@ -71,14 +89,15 @@ public class ClientDaoImp implements ClientDao {
 	@Override
 	public Client login(Client client) {
 		Session s = HibernateUtil.getSession();
-		
+		System.out.println("clients email for login: " + client.getEmail());
+		System.out.println("clients password for login: " + client.getPass());
 //		Client c = (Client) s.createCriteria(Client.class).add(Example.create(client));1
 //		String hql = "from Client where email = :email and pass = :pass";
 //		Client found = (Client) s.createQuery(hql).setParameter("email", client.getEmail()).setParameter("pass", client.getPass());
 //		Client found = (Client) s.createNativeQuery("SELECT * FROM CLIENT C WHERE C.EMAIL = ? AND C.PASS = ?", Client.class)
 //				.setParameter(1, client.getEmail())
 //				.setParameter(2, client.getPass());
-		Query<Client> q = s.createQuery("from Client where email = :email and pass = :pass")
+		Query<Client> q = s.createQuery("from Client c where c.email = :email and c.pass = :pass")
 								.setParameter("email", client.getEmail())
 								.setParameter("pass", client.getPass());
 		Client c = (Client) q.getSingleResult();

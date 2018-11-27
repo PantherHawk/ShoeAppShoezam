@@ -44,6 +44,7 @@ public class ClientService {
 	}
 	
 	public boolean createClient(Client client) {
+		System.out.println("Client object we want to send to the db, from Client Service-----> " + client);
 		int result = ClientDaoImp.getInstance().create(client);
 		if (result > 0) {
 			return true;

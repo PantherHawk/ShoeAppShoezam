@@ -20,7 +20,7 @@ public class Client {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userIdSequence")
 	@SequenceGenerator(name="userIdSequence", allocationSize=1, sequenceName="SEQ_USER_ID")
 	@Column(name="CLIENT_ID")
-	private Integer id;
+	private int id;
 	@Column
 	private String firstName;
 	@Column
@@ -40,8 +40,12 @@ public class Client {
 	@Column
 	@org.hibernate.annotations.Type(type="true_false")
 	private Boolean isAdmin;
+	@Column
+	@org.hibernate.annotations.Type(type="true_false")
+	private Boolean isBlocked;
 	
 	
+
 	/** Constructor with no fields for failed logins */
 	public Client() {
 		super();
@@ -69,10 +73,11 @@ public class Client {
 		this.postalCode		= postalCode;
 		this.country		= country;
 		this.phoneNumber	= phoneNumber;
+		this.isBlocked 		= false;
 	}
 	/** Constructor with all fields is used for generating a bean with data from the DB.*/
 	public Client(Integer userid, String firstName, String lastName, String email, String pass, String address,
-			Integer postalCode, String country, String phoneNumber, Boolean isAdmin) {
+			Integer postalCode, String country, String phoneNumber, Boolean isAdmin, Boolean isBlocked) {
 		super();
 		this.id			= userid;
 		this.firstName		= firstName;
@@ -84,6 +89,7 @@ public class Client {
 		this.country		= country;
 		this.phoneNumber	= phoneNumber;
 		this.isAdmin		= isAdmin;
+		this.isBlocked		= isBlocked;
 	}
 	@Override
 	public int hashCode() {
@@ -98,7 +104,7 @@ public class Client {
 		result	= prime * result + ((pass == null) ? 0 : pass.hashCode());
 		result	= prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result	= prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
-		result	= prime * result + ((id == null) ? 0 : id.hashCode());
+//		result	= prime * result + ((id == 0) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -155,24 +161,36 @@ public class Client {
 				return false;
 		} else if (!postalCode.equals(other.postalCode))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (id == 0) {
+			if (other.id != 0)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (id != other.id)
 			return false;
 		return true;
 	}
+
+
 	@Override
 	public String toString() {
-		return "User [userid=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "Client [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", pass=" + pass + ", address=" + address + ", postalCode=" + postalCode + ", country=" + country
-				+ ", phoneNumber=" + phoneNumber + ", isAdmin=" + isAdmin + "]";
+				+ ", phoneNumber=" + phoneNumber + ", isAdmin=" + isAdmin + ", isBlocked=" + isBlocked + "]";
 	}
-	public Integer getUserid() {
+
+	public Integer getId() {
 		return id;
 	}
-	public void setUserid(Integer userid) {
-		this.id = userid;
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public Boolean getIsBlocked() {
+		return isBlocked;
+	}
+	
+	public void setIsBlocked(Boolean isBlocked) {
+		this.isBlocked = isBlocked;
 	}
 	public String getFirstName() {
 		return firstName;

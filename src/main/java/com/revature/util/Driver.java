@@ -88,9 +88,11 @@ public class Driver {
 //		Arrays.toString(ac.getBeanNamesForType(Client.class)));
 //		Client c = (Client) ac.getBean("client");
 //		c.methodInClientToTestAutomagic();
-		ApplicationContext ac = new ClassPathXmlApplicationContext("src/main/webapp/WEB-INF/beans.xml");
-		System.out.println("Bean names: " +
-				Arrays.toString(ac.getBeanDefinitionNames()));
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("src/main/webapp/WEB-INF/beans.xml");
+//		System.out.println("Bean names: " +
+//				Arrays.toString(ac.getBeanDefinitionNames()));
 		
+		Client toLogin = ClientDaoImp.getInstance().login(new Client("hf@dundermifflin.biz", "password"));
+		System.out.println(toLogin);
 	}
 }
