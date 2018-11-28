@@ -3,12 +3,14 @@ package com.revature.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.beans.Client;
 import com.revature.beans.Shoe;
 import com.revature.beans.ShoeRequest;
 import com.revature.daos.ShoeRequestDaoImp;
 
+@Service
 public class ShoeRequestServiceImp implements ShoeRequestService {
 	
 	@Autowired
