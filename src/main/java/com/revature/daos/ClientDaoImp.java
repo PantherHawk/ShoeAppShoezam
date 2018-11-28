@@ -5,28 +5,19 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
+import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Client;
 import com.revature.util.HibernateUtil;
 
+@Repository
 public class ClientDaoImp implements ClientDao {
 	
-	private static ClientDaoImp clientDaoImp;
-	private ClientDaoImp() {
-		
-	}
-	public static ClientDaoImp getInstance() {
-		if (clientDaoImp == null) {
-			clientDaoImp = new ClientDaoImp();
-		}
-		return clientDaoImp;
-	}
 
 	@Override
 	public Client get(Client client) {
 		Session s = HibernateUtil.getSession();
-		Client user = s.get(Client.class, client.getId());
+		Client user = (Client) s.get(Client.class, client.getEmail());
 		return user;
 	}
 
@@ -41,7 +32,7 @@ public class ClientDaoImp implements ClientDao {
 	@Override
 	public void remove(Client client) {
 		Session s = HibernateUtil.getSession();
-		Transaction tx = s.getTransaction();
+		Transaction tx = s.beginTransaction();
 		s.delete(client);
 		tx.commit();
 		s.close();
@@ -81,13 +72,13 @@ public class ClientDaoImp implements ClientDao {
 	@Override
 	public void update(Client client) {
 		Session s = HibernateUtil.getSession();
-		Transaction tx = s.getTransaction();
+		Transaction tx = s.beginTransaction();
 		s.update(client);
 		tx.commit();
 		s.close();
 	}
 	@Override
-	public Client login(Client client) {
+	public Object login(Client client) {
 		Session s = HibernateUtil.getSession();
 		System.out.println("clients email for login: " + client.getEmail());
 		System.out.println("clients password for login: " + client.getPass());
@@ -97,12 +88,27 @@ public class ClientDaoImp implements ClientDao {
 //		Client found = (Client) s.createNativeQuery("SELECT * FROM CLIENT C WHERE C.EMAIL = ? AND C.PASS = ?", Client.class)
 //				.setParameter(1, client.getEmail())
 //				.setParameter(2, client.getPass());
-		Query<Client> q = s.createQuery("from Client c where c.email = :email and c.pass = :pass")
+		Query q = s.createQuery("from Client c where c.email = :email and c.pass = :pass")
 								.setParameter("email", client.getEmail())
 								.setParameter("pass", client.getPass());
-		Client c = (Client) q.getSingleResult();
-		System.out.println(c);
+		Object c = q.getSingleResult();
 		return c;
+//		Client c = s.get(Client.class, client.getEmail());
+//		System.out.println(c);
+//		Client cC = (Client) c;
+//		if (c != null) {
+//			return c;
+//		}
+//		if (c.getEmail() != null) {
+//			if (c.getPass().equals(client.getPass())) {
+//				return c;
+//			}
+//		}
+//		if (client.getPass().equals(c.getPass())) {
+//			System.out.println("Client: " + c);
+//			return c;
+//		}
+//		return null;
 	}
 
 }

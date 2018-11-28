@@ -40,7 +40,7 @@ public class ShoeRequestDaoImp implements ShoeRequestDao {
 		s.update(request);
 		s.update(toTrade);
 		tx.commit();
-		ShoeRequest changed = s.get(ShoeRequest.class, shoereq.getId());
+		ShoeRequest changed = (ShoeRequest) s.get(ShoeRequest.class, shoereq.getId());
 		if (changed.getClient_owner().equals(shoereq.getClient_owner())) {
 			return true;
 		}
@@ -54,7 +54,7 @@ public class ShoeRequestDaoImp implements ShoeRequestDao {
 		shoereq.setStatus(2);
 		s.update(shoereq);
 		tx.commit();
-		ShoeRequest changed = s.get(ShoeRequest.class, shoereq.getId());
+		ShoeRequest changed = (ShoeRequest) s.get(ShoeRequest.class, shoereq.getId());
 		if (changed.getClient_owner().equals(shoereq.getClient_owner())) {
 			return true;
 		}

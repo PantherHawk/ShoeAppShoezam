@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,16 +26,22 @@ public class ClientController {
 	@ResponseBody
 	public List<Client> getClientById() {
 		System.out.println("Hit Client Controller...");
-		List<Client> allTheClients = ClientService.getInstance().getAll();
+		List<Client> allTheClients = clientService.getAll();
 		return allTheClients;
 	}
 	
-	@RequestMapping(value="/clients/login", method=RequestMethod.POST)
+	@RequestMapping(value="/clients/login", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Client getClientViaLogin(@RequestBody Client client) {
+	public Object getClientViaLogin(@RequestBody Client client) {
 		System.out.println("Hit login controller");
 		System.out.println("Login request body: " + client);
-		return ClientService.getInstance().login(client);
+		Object loggedinClient = clientService.login(client);
+		return loggedinClient;
+//		if (loggedinClient == null) {
+//			return null;
+//		} else {
+//			return loggedinClient;
+//		}
 //		return ClientService.getInstance().login(client);
 	}
 	
@@ -48,18 +55,18 @@ public class ClientController {
 	
 	@RequestMapping(value="/clients/:id", method=RequestMethod.DELETE)
 	public boolean removeClient(@RequestBody Client client) {
-		return ClientService.getInstance().deleteClient(client);
+		return clientService.deleteClient(client);
 	}
 	
-	@RequestMapping(value="/clients", method=RequestMethod.POST)
+	@RequestMapping(value="/clients", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public boolean add(@RequestBody Client client) {
-		return ClientService.getInstance().createClient(client);
+		return clientService.createClient(client);
 	}
 	
-	@RequestMapping(value="/clients", method=RequestMethod.PUT)
+	@RequestMapping(value="/clients", method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public void edit(@RequestBody Client client) {
-		ClientService.getInstance().editClient(client);
+		clientService.editClient(client);
 	}
 }

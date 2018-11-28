@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Client;
@@ -10,33 +11,26 @@ import com.revature.daos.ClientDaoImp;
 @Service
 public class ClientService {
 
-	private static ClientService clientService;
-	public ClientService() {
+	@Autowired
+	ClientDaoImp clientDao;
 		
-	}
-	public static ClientService getInstance() {
-		if (clientService == null) {
-			clientService = new ClientService();
-		}
-		return clientService;
-	}
-	
-	public Client login(Client client) {
+	public Object login(Client client) {
 //		return ClientDaoImp.getInstance().get(client);
-		return ClientDaoImp.getInstance().login(client);
+		Object c = clientDao.login(client);
+		return c;
 	}
 	
 	public List<Client> getAll() {
-		return ClientDaoImp.getInstance().getAll();
+		return clientDao.getAll();
 	}
 	
 	public Client getOne(Client client) {
-		return ClientDaoImp.getInstance().get(client);
+		return clientDao.get(client);
 	}
 	
 	public boolean deleteClient(Client client) {
-		ClientDaoImp.getInstance().remove(client);
-		Client notFound = ClientDaoImp.getInstance().get(client);
+		clientDao.remove(client);
+		Client notFound = clientDao.get(client);
 		if (notFound == null) {
 			return true;
 		}
@@ -45,7 +39,7 @@ public class ClientService {
 	
 	public boolean createClient(Client client) {
 		System.out.println("Client object we want to send to the db, from Client Service-----> " + client);
-		int result = ClientDaoImp.getInstance().create(client);
+		int result = clientDao.create(client);
 		if (result > 0) {
 			return true;
 		}
@@ -53,6 +47,7 @@ public class ClientService {
 	}
 	
 	public void editClient(Client client) {
-		ClientDaoImp.getInstance().update(client);
+		System.out.println("What is the client object? -------------> " + client);
+		clientDao.update(client);
 	}
 }

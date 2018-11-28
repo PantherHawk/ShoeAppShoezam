@@ -13,7 +13,7 @@ public class Seeder {
 	public static void main(String[] args) {
 		
 		ShoeDaoImp sd = new ShoeDaoImp();
-//	ClientDaoImp cd = new ClientDaoImp().getInstance();
+	ClientDaoImp cd = new ClientDaoImp();
 		ShoeRequestDaoImp sr = new ShoeRequestDaoImp();
 		
 //		10 CLIENTS IN DB
@@ -32,7 +32,7 @@ public class Seeder {
 		
 		Client[] clients = {pam, jim, stanley, dwight, kevin, angela, merideth, kelly, michael, craig, ellie};
 		for (Client c : clients) {
-			ClientDaoImp.getInstance().create(c);
+			cd.create(c);
 		}
 		
 		

@@ -17,10 +17,10 @@ import com.revature.daos.ShoeRequestDaoImp;
 public class Driver {
 
 	public static void main(String[] args) {
-//		Session session = HibernateUtil.getSession();
-//		session.close();
+		Session session = HibernateUtil.getSession();
+		session.close();
 //		
-//		ClientDaoImp cd = ClientDaoImp.getInstance();
+		ClientDaoImp cd = ClientDaoImp.getInstance();
 //		ShoeDaoImp sd = new ShoeDaoImp();
 //		ShoeRequestDaoImp sr = new ShoeRequestDaoImp();
 //		
@@ -92,7 +92,9 @@ public class Driver {
 //		System.out.println("Bean names: " +
 //				Arrays.toString(ac.getBeanDefinitionNames()));
 		
-		Client toLogin = ClientDaoImp.getInstance().login(new Client("hf@dundermifflin.biz", "password"));
-		System.out.println(toLogin);
+//		Object toLogin = ClientDaoImp.getInstance().login(new Client("jh@dundermifflin.biz", "password"));
+//		System.out.println(toLogin);
+		
+		cd.update(new Client("Pam", "Beasely", "pamb@pratinstitutde.edu", "password", "213 potato lane", 38383, "USA", "909-999-9999"));
 	}
 }

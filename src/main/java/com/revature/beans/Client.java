@@ -2,31 +2,30 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
 @Entity
-@Table(uniqueConstraints= {@UniqueConstraint(columnNames= {"email", "pass"})})
+@Table(name="client", uniqueConstraints= {@UniqueConstraint(columnNames= {"email", "pass"})})
+@Component
+@Scope(value="prototype")
 public class Client {
 
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userIdSequence")
+//	@SequenceGenerator(name="userIdSequence", allocationSize=1, sequenceName="SEQ_USER_ID")
+//	@Column(name="CLIENT_ID")
+//	private int id;
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userIdSequence")
-	@SequenceGenerator(name="userIdSequence", allocationSize=1, sequenceName="SEQ_USER_ID")
-	@Column(name="CLIENT_ID")
-	private int id;
+	@Column
+	private String email;
 	@Column
 	private String firstName;
 	@Column
 	private String lastName;
-	@Column
-	private String email;
 	@Column
 	private String pass;
 	@Column
@@ -43,6 +42,7 @@ public class Client {
 	@Column
 	@org.hibernate.annotations.Type(type="true_false")
 	private Boolean isBlocked;
+
 	
 	
 
@@ -51,9 +51,9 @@ public class Client {
 		super();
 	}
 	
-	public Client(Integer id) {
+	public Client(String id) {
 		super();
-		this.id = id;
+		this.email = id;
 	}
 	/** Constructor with only email and password for generating bean with login data*/
 	public Client(String email, String pass) {
@@ -76,13 +76,12 @@ public class Client {
 		this.isBlocked 		= false;
 	}
 	/** Constructor with all fields is used for generating a bean with data from the DB.*/
-	public Client(Integer userid, String firstName, String lastName, String email, String pass, String address,
-			Integer postalCode, String country, String phoneNumber, Boolean isAdmin, Boolean isBlocked) {
+	public Client(String email, String firstName, String lastName, String pass, String address, Integer postalCode,
+			String country, String phoneNumber, Boolean isAdmin, Boolean isBlocked) {
 		super();
-		this.id			= userid;
+		this.email			= email;
 		this.firstName		= firstName;
 		this.lastName		= lastName;
-		this.email			= email;
 		this.pass			= pass;
 		this.address		= address;
 		this.postalCode		= postalCode;
@@ -91,6 +90,7 @@ public class Client {
 		this.isAdmin		= isAdmin;
 		this.isBlocked		= isBlocked;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,6 +107,7 @@ public class Client {
 //		result	= prime * result + ((id == 0) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -161,30 +162,33 @@ public class Client {
 				return false;
 		} else if (!postalCode.equals(other.postalCode))
 			return false;
-		if (id == 0) {
-			if (other.id != 0)
-				return false;
-		} else if (id != other.id)
-			return false;
+//		if (id == 0) {
+//			if (other.id != 0)
+//				return false;
+//		} else if (id != other.id)
+//			return false;
 		return true;
 	}
 
 
+
+
+//	public Integer getId() {
+//		return id;
+//	}
+//	
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
+	
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", pass=" + pass + ", address=" + address + ", postalCode=" + postalCode + ", country=" + country
-				+ ", phoneNumber=" + phoneNumber + ", isAdmin=" + isAdmin + ", isBlocked=" + isBlocked + "]";
+		return "Client [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", pass=" + pass
+				+ ", address=" + address + ", postalCode=" + postalCode + ", country=" + country + ", phoneNumber="
+				+ phoneNumber + ", isAdmin=" + isAdmin + ", isBlocked=" + isBlocked
+				+ "]";
 	}
 
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
 	public Boolean getIsBlocked() {
 		return isBlocked;
 	}
@@ -245,6 +249,9 @@ public class Client {
 	}
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+		if (isAdmin == null) {
+			this.isAdmin = false;
+		}
 	}
 	public void methodInClientToTestAutomagic() {
 		System.out.println("Automagic success!");

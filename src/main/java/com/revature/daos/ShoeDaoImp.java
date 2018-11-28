@@ -2,25 +2,18 @@ package com.revature.daos;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+//import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Shoe;
 import com.revature.util.HibernateUtil;
 
+@Repository
 public class ShoeDaoImp implements ShoeDao {
-	
-	private static ShoeDaoImp shoeDaoImp;
-	public ShoeDaoImp() {
-		
-	}
-	public static ShoeDaoImp getInstance() {
-		if (shoeDaoImp == null) {
-			shoeDaoImp = new ShoeDaoImp();
-		}
-		return shoeDaoImp;
-	}
+
 
 	@Override
 	public List<Shoe> getAll() {
@@ -92,10 +85,9 @@ public class ShoeDaoImp implements ShoeDao {
 //		s.close();
 //		System.out.println(the_shoe);
 //		return the_shoe;
-		Query<Shoe> result = s.createQuery("from Shoe WHERE SHOE_ID=:shoe_id", Shoe.class)
-				.setParameter("shoe_id", shoe.getId());
-		Shoe found = (Shoe) result.getSingleResult();
-		return found;
+		Shoe result = (Shoe) s.createQuery("from Shoe WHERE SHOE_ID=:shoe_id")
+				.setParameter("shoe_id", shoe.getId()).uniqueResult();
+		return result;
 	}
 
 	@Override
@@ -112,7 +104,7 @@ public class ShoeDaoImp implements ShoeDao {
 	public void remove(Shoe shoe) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
-		s.remove(shoe);
+		s.delete(shoe);
 		tx.commit();
 		s.close();
 	}

@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Shoe;
@@ -9,44 +10,36 @@ import com.revature.daos.ShoeDaoImp;
 
 @Service
 public class ShoeServiceImp implements ShoeService {
-
-	private static ShoeServiceImp shoeServiceImp;
-	public ShoeServiceImp() {
-		
-	}
-	public static ShoeServiceImp getInstance() {
-		if (shoeServiceImp == null) {
-			shoeServiceImp = new ShoeServiceImp();
-		}
-		return shoeServiceImp;
-	}
+	
+	@Autowired
+	ShoeDaoImp shoeDaoImp;
 	
 	public List<Shoe> fetchAllShoes() {
-		return ShoeDaoImp.getInstance().getAll();
+		return shoeDaoImp.getAll();
 	}
 	@Override
 	public List<Shoe> fetchShoesByColor(String color) {
-		return ShoeDaoImp.getInstance().getByColor(color);
+		return shoeDaoImp.getByColor(color);
 	}
 	@Override
 	public List<Shoe> fetchShoesBySize(Double size) {
-		return ShoeDaoImp.getInstance().getBySize(size);
+		return shoeDaoImp.getBySize(size);
 	}
 	@Override
 	public List<Shoe> fetchShoesByBrand(String brand) {
-		return ShoeDaoImp.getInstance().getByBrand(brand);
+		return shoeDaoImp.getByBrand(brand);
 	}
 	@Override
 	public List<Shoe> fetchShoesBySizeRange(Double min, Double max) {
-		return ShoeDaoImp.getInstance().getBySizerange(min, max);
+		return shoeDaoImp.getBySizerange(min, max);
 	}
 	@Override
 	public List<Shoe> fetchShoesByPriceRange(Double min, Double max) {
-		return ShoeDaoImp.getInstance().getByPricerange(min, max);
+		return shoeDaoImp.getByPricerange(min, max);
 	}
 	@Override
 	public Shoe fetchOneShoe(Integer id) {
-		return ShoeDaoImp.getInstance().getOneShoe(new Shoe(id));
+		return shoeDaoImp.getOneShoe(new Shoe(id));
 	}
 	@Override
 	public Shoe updateShoe(Shoe shoe) {
@@ -60,7 +53,7 @@ public class ShoeServiceImp implements ShoeService {
 	}
 	@Override
 	public Shoe addShoe(Shoe shoe) {
-		ShoeDaoImp.getInstance().add(shoe);
+		shoeDaoImp.add(shoe);
 		return shoe;
 	}
 	

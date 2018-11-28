@@ -1,33 +1,47 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(value="prototype")
+@Entity
 public class Shoe {
-
+	
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="shoeIdSequence")
+	@SequenceGenerator(name="shoeIdSequence", allocationSize=1, sequenceName="SEQ_SHOE_ID")
+	@Column(name="SHOE_ID")
+	@Id
 	private Integer id;
 	
 	/** Unidirectional association via foreign key*/
-//	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "client_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "email", nullable = false)
 	@Autowired
 	private Client client;
 	
+	@Column
 	private String title;
-//	@Column
+	@Column
 	private String brand;
-//	@Column
+	@Column
 	private Double shoeSize;
-//	@Column
+	@Column
 	private Double price;
-//	@Column
+	@Column
 	private String color;
-	
+	@Column
 	private Integer shoeStatus;
 	
 	
