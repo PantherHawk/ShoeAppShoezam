@@ -47,7 +47,7 @@ public class CORSFilter implements Filter {
 //        System.out.println("CORSFilter HTTP Request: " + request.getMethod());
  
         // Authorize (allow) all domains to consume the content
-        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST");
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Credentials","true");
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers","Set-Cookie, Origin, X-Requested-With, Content-Type, Accept");

@@ -15,7 +15,7 @@ public class ShoeRequestServiceImp implements ShoeRequestService {
 	
 	@Autowired
 	ShoeRequestDaoImp shoeRequestDaoImp;
-
+	
 	@Override
 	public List<ShoeRequest> fetchAll() {
 		List<ShoeRequest> shoes = shoeRequestDaoImp.getAll();
