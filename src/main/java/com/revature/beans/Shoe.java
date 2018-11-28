@@ -27,7 +27,7 @@ public class Shoe {
 	
 	/** Unidirectional association via foreign key*/
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "email", nullable = false)
+	@JoinColumn(name = "client_id", nullable = false)
 	@Autowired
 	private Client client;
 	

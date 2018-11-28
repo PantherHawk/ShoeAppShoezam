@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Client;
 import com.revature.beans.Shoe;
 import com.revature.beans.ShoeRequest;
 import com.revature.util.HibernateUtil;
 
+@Repository
 public class ShoeRequestDaoImp implements ShoeRequestDao {
 
 	@Override
@@ -63,20 +65,38 @@ public class ShoeRequestDaoImp implements ShoeRequestDao {
 
 	@Override
 	public List<ShoeRequest> getAllByShoe(Shoe shoe) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = HibernateUtil.getSession();
+		String hql = "from ShoeRequest where shoe_requested_id=:id";
+		List<ShoeRequest> shoes = s.createQuery(hql).setParameter(1, shoe.getId()).list();
+		s.close();
+		return shoes;
 	}
 
 	@Override
 	public List<ShoeRequest> getAllBelongingToClient(Client client) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = HibernateUtil.getSession();
+		String hql = "from ShoeRequest where client_owner_id=:id";
+		List<ShoeRequest> shoes = s.createQuery(hql).setParameter(1, client.getId()).list();
+		s.close();
+		return shoes;
 	}
 
 	@Override
 	public List<ShoeRequest> getAllMadeByClient(Client client) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = HibernateUtil.getSession();
+		String hql = "from ShoeRequest where client_requester_id=:id";
+		List<ShoeRequest> shoes = s.createQuery(hql).setParameter(1, client.getId()).list();
+		s.close();
+		return shoes;
+	}
+
+	@Override
+	public List<ShoeRequest> getAll() {
+		Session s = HibernateUtil.getSession();
+		String hql = "from ShoeRequest";
+		List<ShoeRequest> shoes = s.createQuery(hql).list();
+		s.close();
+		return shoes;
 	}
 
 }

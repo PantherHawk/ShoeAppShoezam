@@ -2,7 +2,10 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -15,11 +18,11 @@ import org.springframework.stereotype.Component;
 @Scope(value="prototype")
 public class Client {
 
-//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userIdSequence")
-//	@SequenceGenerator(name="userIdSequence", allocationSize=1, sequenceName="SEQ_USER_ID")
-//	@Column(name="CLIENT_ID")
-//	private int id;
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="userIdSequence")
+	@SequenceGenerator(name="userIdSequence", allocationSize=1, sequenceName="SEQ_USER_ID")
+	@Column(name="CLIENT_ID")
+	private Integer id;
 	@Column
 	private String email;
 	@Column
@@ -51,9 +54,9 @@ public class Client {
 		super();
 	}
 	
-	public Client(String id) {
+	public Client(Integer id) {
 		super();
-		this.email = id;
+		this.id = id;
 	}
 	/** Constructor with only email and password for generating bean with login data*/
 	public Client(String email, String pass) {
@@ -76,9 +79,11 @@ public class Client {
 		this.isBlocked 		= false;
 	}
 	/** Constructor with all fields is used for generating a bean with data from the DB.*/
-	public Client(String email, String firstName, String lastName, String pass, String address, Integer postalCode,
-			String country, String phoneNumber, Boolean isAdmin, Boolean isBlocked) {
+
+	public Client(int id, String email, String firstName, String lastName, String pass, String address,
+			Integer postalCode, String country, String phoneNumber, Boolean isAdmin, Boolean isBlocked) {
 		super();
+		this.id				= id;
 		this.email			= email;
 		this.firstName		= firstName;
 		this.lastName		= lastName;
@@ -107,6 +112,7 @@ public class Client {
 //		result	= prime * result + ((id == 0) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -181,12 +187,21 @@ public class Client {
 //		this.id = id;
 //	}
 	
+	
+
+
 	@Override
 	public String toString() {
-		return "Client [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", pass=" + pass
-				+ ", address=" + address + ", postalCode=" + postalCode + ", country=" + country + ", phoneNumber="
-				+ phoneNumber + ", isAdmin=" + isAdmin + ", isBlocked=" + isBlocked
-				+ "]";
+		return "Client [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", pass=" + pass + ", address=" + address + ", postalCode=" + postalCode + ", country=" + country
+				+ ", phoneNumber=" + phoneNumber + ", isAdmin=" + isAdmin + ", isBlocked=" + isBlocked + "]";
+	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Boolean getIsBlocked() {
