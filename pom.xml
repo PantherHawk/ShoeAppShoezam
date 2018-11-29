@@ -18,7 +18,6 @@
   				<artifactId>platform-bom</artifactId>
   				<version>4.2.5.RELEASE</version>
 				<scope>import</scope>
-				<type>pom</type>
   			</dependency>
   		</dependencies>
   	</dependencyManagement>
