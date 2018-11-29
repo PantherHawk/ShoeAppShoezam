@@ -69,4 +69,10 @@ public class ClientController {
 	public void edit(@RequestBody Client client) {
 		clientService.editClient(client);
 	}
+	
+	@RequestMapping(value="/clients/block", method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String block(@RequestBody Client client) {
+		return clientService.block(client);
+	}
 }

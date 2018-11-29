@@ -50,4 +50,11 @@ public class ClientService {
 		System.out.println("What is the client object? -------------> " + client);
 		clientDao.update(client);
 	}
+	
+	public String block(Client client) {
+		System.out.println("Blocking client...");
+		client.setIsBlocked(true);
+		clientDao.update(client);
+		return "Client " + client.getEmail() + " now blocked.";
+	}
 }
