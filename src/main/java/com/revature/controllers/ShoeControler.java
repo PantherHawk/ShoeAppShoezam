@@ -97,5 +97,12 @@ public class ShoeControler {
 		return response;
 	}
 	
+	@GetMapping("/client/{id}")
+	@ResponseBody
+	public List<Shoe> getShoesForClient(@PathVariable("id") Integer id) {
+		Client c = new Client(id);
+		List<Shoe> shoesOfClient = shoeService.fetchShoesBelongingToClient(c);
+		return shoesOfClient;
+	}
 	
 }

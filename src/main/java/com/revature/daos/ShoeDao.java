@@ -2,6 +2,7 @@ package com.revature.daos;
 
 import java.util.List;
 
+import com.revature.beans.Client;
 import com.revature.beans.Shoe;
 
 public interface ShoeDao {
@@ -14,6 +15,7 @@ public interface ShoeDao {
 	public List<Shoe> getByPricerange(Double lower_bound, Double upper_bound);
 	public List<Shoe> getBySizerange(Double lower_bound, Double upper_bound);
 	public Shoe getOneShoe(Shoe shoe);
+	public List<Shoe> getShoesByClientId(Client client);
 	public void update(Shoe shoe);
 	public void remove(Shoe shoe);
 	public void add(Shoe shoe);

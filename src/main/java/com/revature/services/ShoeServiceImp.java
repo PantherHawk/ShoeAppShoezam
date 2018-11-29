@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.Client;
 import com.revature.beans.Shoe;
 import com.revature.daos.ShoeDaoImp;
 
@@ -55,6 +56,10 @@ public class ShoeServiceImp implements ShoeService {
 	public Shoe addShoe(Shoe shoe) {
 		shoeDaoImp.add(shoe);
 		return shoe;
+	}
+	@Override
+	public List<Shoe> fetchShoesBelongingToClient(Client client) {
+		return shoeDaoImp.getShoesByClientId(client);
 	}
 	
 }

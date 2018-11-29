@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 //import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.revature.beans.Client;
 import com.revature.beans.Shoe;
 import com.revature.util.HibernateUtil;
 
@@ -142,6 +143,7 @@ public class ShoeDaoImp implements ShoeDao {
 										.setParameter("a", lower_bound)
 										.setParameter("b", upper_bound)
 										.list();
+		
 		s.close();
 		return shoesInRange;
 	}
@@ -149,6 +151,17 @@ public class ShoeDaoImp implements ShoeDao {
 	public List<Shoe> getByType(String type) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Shoe> getShoesByClientId(Client client) {
+		Session s = HibernateUtil.getSession();
+		String hql = "from Shoe s where s.client_id=:id";
+		List<Shoe> shoesOfClient = s.createQuery(hql)
+										.setParameter("id", client.getId())
+										.list();
+		s.close();
+		return shoesOfClient;
 	}
 
 }
