@@ -39,8 +39,8 @@ public class ClientController {
 		System.out.println("Hit Client Controller...");
 		Client result = new Client();
 		result.setId(0);
-		result.setFirstName("AKIAIP3L7I4QLMVMGEEA");
-		result.setLastName("nLcz1INQ/aYmGLE/ixDWijtGFXFY5VuAabGFUbgB");
+		result.setFirstName("AK");
+		result.setLastName("nLc");
 		result.setEmail("http://shoezam.s3.amazonaws.com");
 		result.setPass("shoezam");
 		result.setAddress(null);
